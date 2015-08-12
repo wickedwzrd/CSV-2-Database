@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSV to Database</title>
+<meta charset="UTF-8">
+<style> 
+body {
+background-color: #1e1e1e;
+color: #00dc00; 
+}
+h1 {
+color: #00daff;
+}
+div {
+margin: auto;
+width: 40%;
+padding: 10px;
+}
+input:hover {
+color: #008cff;
+}
+</style>
+</head>
+<body>
+<div>
+<h1>CSV to Database</h1>
+
+<p>This application reads a CSV file and adds the records into the database.</p>
+
+<form action="CsvUpload" method="POST" enctype="multipart/form-data">
+<input type="file" name="file">
+<br><br>
+<input type="submit" value="Upload">
+</form>
+</div>
+</body>
+</html>
