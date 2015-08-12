@@ -3,7 +3,6 @@ package csv;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,8 +27,6 @@ public class Csv2Database {
     }
     
     public ArrayList<Person> readCsv(InputStream is) {
-        parsedPersons.clear();
-        ArrayList<String> test = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         
         try {
@@ -50,6 +47,10 @@ public class Csv2Database {
                 
                 parsedPersons.add(person);
             }
+            
+            // done with file stream, clean up
+            if(reader != null) reader.close();
+            if(is != null) is.close();
         } catch (Exception e) {
             e.getMessage();
         }

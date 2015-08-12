@@ -37,7 +37,7 @@ public class CsvUpload extends HttpServlet {
     {
         try {
             // get file from request
-            Part filePart = request.getPart("");
+            Part filePart = request.getPart("file");
             InputStream fileStream = filePart.getInputStream();
             
             // create instance of Model
@@ -68,36 +68,6 @@ public class CsvUpload extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.println("<p>[ERROR] " + e.getMessage() + "</p>");
         }
-        /*
-        BufferedReader reader = new BufferedReader(new InputStreamReader(fileStream));
-        
-        // parse and add
-        Csv2Database csv = new Csv2Database();
-        
-        // container for records
-        ArrayList<String> lines = new ArrayList<>();
-        
-        try {
-            String line;
-            
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (Exception e) {
-            out.println("<p>" + e.getMessage() + "</p>");
-        }
-
-        // print output
-        printHeader(out, "CSV Reader", "");
-
-        // print body
-        int count = lines.size();
-        for(int i = 0; i < count; ++i)
-        {
-            out.println("<div><span style='color:red;'>" + (i+1) + ":</span> " +
-                        lines.get(i) + "</div>");
-        }
-        printFooter(out);*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
