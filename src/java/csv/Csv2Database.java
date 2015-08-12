@@ -33,6 +33,10 @@ public class Csv2Database {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] tmp = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                
+                for (int i = 0; i < tmp.length; ++ i) 
+                    tmp[i] = tmp[i].replaceAll("^\"|\"$", "");
+                
                 person.setFirstName(tmp[0]);
                 person.setLastName(tmp[1]);
                 person.setCompanyName(tmp[2]);
@@ -44,7 +48,7 @@ public class Csv2Database {
                 person.setPhone2(tmp[8]);
                 person.setEmail(tmp[9]);
                 person.setWeb(tmp[10]);
-                
+                    
                 parsedPersons.add(person);
             }
             
