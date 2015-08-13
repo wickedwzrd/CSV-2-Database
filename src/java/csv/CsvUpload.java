@@ -1,9 +1,7 @@
 package csv;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -45,7 +43,7 @@ public class CsvUpload extends HttpServlet {
             
             // parse csv
             ArrayList<Person> parsedPersons = c2d.readCsv(fileStream);
-            
+
             // close file resource
             fileStream.close();
             
@@ -108,7 +106,7 @@ public class CsvUpload extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+  /*  
     private void test(HttpServletResponse response, InputStream is) throws Exception {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
@@ -124,7 +122,7 @@ public class CsvUpload extends HttpServlet {
             ++count;
         }
         
-    }
+    }*/
     
     ///////////////////////////////////////////////////////////////////////////
     // helper methods to print HTML content

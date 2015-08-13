@@ -10,7 +10,7 @@ import tan.JdbcHelper;
 
 public class Csv2Database {
     // constants
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/ejd";
+    private static final String DB_URL = "jdbc:mysql://localhost/ejd";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "";
     // member vars
@@ -36,7 +36,7 @@ public class Csv2Database {
                 
                 for (int i = 0; i < tmp.length; ++ i) 
                     tmp[i] = tmp[i].replaceAll("^\"|\"$", "");
-                
+               
                 person.setFirstName(tmp[0]);
                 person.setLastName(tmp[1]);
                 person.setCompanyName(tmp[2]);

@@ -16,7 +16,7 @@
 
 <h1>CSV Upload Result</h1>
 <p>${parsedCount}</p>
-<p>${addedPersons}</p>
+<p>${parsedPersons}</p>
 
 <%-- foreach loop to print added persons --%>
 <c:forEach var="person" items="${addedPersons}" varStatus="status">
