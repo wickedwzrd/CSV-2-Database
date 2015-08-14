@@ -14,9 +14,9 @@ public class Csv2Database {
     private static final String DB_USER = "root";
     private static final String DB_PASS = "";
     // member vars
-    private ArrayList<Person> parsedPersons;
-    private ArrayList<Person> addedPersons;
-    private JdbcHelper jdbc;
+    private final ArrayList<Person> parsedPersons;
+    private final ArrayList<Person> addedPersons;
+    private final JdbcHelper jdbc;
     private Person person;
     
     // ctor
@@ -27,12 +27,14 @@ public class Csv2Database {
     }
     
     public ArrayList<Person> readCsv(InputStream is) {
+        parsedPersons.clear();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         
         try {
+            reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] tmp = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                String[] tmp = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
                 
                 for (int i = 0; i < tmp.length; ++ i) 
                     tmp[i] = tmp[i].replaceAll("^\"|\"$", "");
@@ -58,7 +60,7 @@ public class Csv2Database {
         } catch (Exception e) {
             e.getMessage();
         }
-        
+        System.out.println(parsedPersons.size());
         return parsedPersons;
     }
     
@@ -71,7 +73,7 @@ public class Csv2Database {
         
         // test if it is new or not
         for (int i = 0; i < persons.size(); ++i) {
-            Person person = persons.get(i);
+            person = persons.get(i);
             // skip if already exist
             if (isPersonExsist(exsistingPersons, person))
                 continue;
