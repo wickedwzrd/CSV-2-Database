@@ -88,13 +88,14 @@ public class Csv2Database {
     public ArrayList<Person> addPersons(ArrayList<Person> persons) {
         // reset
         addedPersons.clear();
-        Person person;
         
         // get all exsisting data from DB
         ArrayList<Person> exsistingPersons = getPersonsFromDatabase();
         
         // test if it is new or not
-        for (int i = 0; i < persons.size(); ++i) {
+        int count = persons.size();
+        for (int i = 0; i < count; ++i) {
+            Person person;
             person = persons.get(i);
             // skip if already exist
             if (isPersonExsist(exsistingPersons, person))
@@ -120,7 +121,8 @@ public class Csv2Database {
             params.add(person.getWeb());
             
             int result = jdbc.update(sql, params);
-            if (result == 0) 
+            
+            if (result != -1) 
                 addedPersons.add(person); // add only if success
         }
         

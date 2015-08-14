@@ -11,29 +11,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Csv2Database Result</title>
+<style>
+body{
+    font-family:arial, helvetica, sans-serif;
+}
+table, th, td {
+    border-collapse:collapse;   
+    border:1px solid #aaa;
+    padding:0 5px;
+}
+tr:nth-child(odd) {
+    background-color: #eee; 
+}
+</style>
 </head>
 <body>
 
 <h1>CSV Upload Result</h1>
-<p>${parsedCount}</p>
-<p>${addedCount}</p>
+<p>Parsed Records: ${parsedCount}</p>
+<p>Added Records: ${addedCount}</p>
 
-<%-- foreach loop to print added persons --%>
+<%-- foreach loop to print added persons
 <c:forEach var="person" items="${addedPersons}" varStatus="status">
     <p>${status.count} : ${person.firstName} ${person.lastName}</p>
 </c:forEach>
+--%>
 
 <%-- print all records using EL --%>
 <table>
 <tr>
-<th>First Name</th> <th>Last Name</th> <th>Company Name</th> <th>Address</th>
-<th>City</th> <th>Province</th> <th>Postal</th> <th>Phone 1</th> <th>Phone 2</th>
-<th>Email</th> <th>Web</th>
+<th>#</th><th>First Name</th> <th>Last Name</th> <th>Company Name</th> 
+<th>Address</th><th>City</th> <th>Province</th> <th>Postal</th><th>Phone 1</th>
+<th>Phone 2</th><th>Email</th> <th>Web</th>
 </tr>
 
 <%-- foreach loop to print added persons --%>
 <c:forEach var="person" items="${addedPersons}" varStatus="status">
     <tr>
+    <td>${status.count}</td>
     <td>${person.firstName}</td>
     <td>${person.lastName}</td>
     <td>${person.companyName}</td>

@@ -53,6 +53,7 @@ public class CsvUpload extends HttpServlet {
             // set attribute for JSP
             int parsedCount = parsedPersons.size();
             int addedCount = addedPersons.size();
+            System.out.println(addedCount);
             request.setAttribute("parsedCount", parsedCount);
             request.setAttribute("addedCount", addedCount);
             request.setAttribute("addedPersons", addedPersons);
