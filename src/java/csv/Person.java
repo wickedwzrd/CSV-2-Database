@@ -1,7 +1,5 @@
 package csv;
 
-import java.util.Objects;
-
 public class Person {
     // 11 member vars
     private String firstName;
