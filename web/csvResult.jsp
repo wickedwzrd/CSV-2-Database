@@ -16,14 +16,14 @@
 
 <h1>CSV Upload Result</h1>
 <p>${parsedCount}</p>
-<p>${parsedPersons}</p>
+<p>${addedPersons}</p>
 
 <%-- foreach loop to print added persons --%>
 <c:forEach var="person" items="${addedPersons}" varStatus="status">
     <p>${status.count} : ${person.firstName} ${person.lastName}</p>
 </c:forEach>
 
-<%-- print all records using EL 
+<%-- print all records using EL --%>
 <table>
 <tr>
 <th>First Name</th> <th>Last Name</th> <th>Company Name</th> <th>Address</th>
@@ -31,10 +31,9 @@
 <th>Email</th> <th>Web</th>
 </tr>
 
-<%-- foreach loop to print added persons 
+<%-- foreach loop to print added persons --%>
 <c:forEach var="person" items="${addedPersons}" varStatus="status">
     <tr>
-    <td>${status.count}</td>
     <td>${person.firstName}</td>
     <td>${person.lastName}</td>
     <td>${person.companyName}</td>
@@ -49,7 +48,7 @@
     </tr>
 </c:forEach>
 
-</table>--%>
+</table>
 
 </body>
 </html>
