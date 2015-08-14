@@ -1,6 +1,7 @@
 package csv;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.ResultSet;
@@ -17,7 +18,6 @@ public class Csv2Database {
     private final ArrayList<Person> parsedPersons;
     private final ArrayList<Person> addedPersons;
     private final JdbcHelper jdbc;
-    private Person person;
     
     // ctor
     public Csv2Database() {
@@ -27,38 +27,59 @@ public class Csv2Database {
     }
     
     public ArrayList<Person> readCsv(InputStream is) {
+        // reset before process
         parsedPersons.clear();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        ArrayList<String> lines = new ArrayList<>();
+        String line = null;
         
+        // read csv file
         try {
-            reader.readLine();
-            String line;
+            // create buffered reader
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+            // loop to get all lines
             while ((line = reader.readLine()) != null) {
-                String[] tmp = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-                
-                for (int i = 0; i < tmp.length; ++ i) 
-                    tmp[i] = tmp[i].replaceAll("^\"|\"$", "");
-               
-                person.setFirstName(tmp[0]);
-                person.setLastName(tmp[1]);
-                person.setCompanyName(tmp[2]);
-                person.setAddress(tmp[3]);
-                person.setCity(tmp[4]);
-                person.setProvince(tmp[5]);
-                person.setPostal(tmp[6]);
-                person.setPhone1(tmp[7]);
-                person.setPhone2(tmp[8]);
-                person.setEmail(tmp[9]);
-                person.setWeb(tmp[10]);
-                    
-                parsedPersons.add(person);
+                lines.add(line);
             }
             
-            // done with file stream, clean up
-            if(reader != null) reader.close();
-            if(is != null) is.close();
-        } catch (Exception e) {
-            e.getMessage();
+            // close resource
+            reader.close();
+        } catch (IOException ex) {
+            System.out.println("[ERROR] " + ex.getMessage());
+        }
+        
+        // split, trim
+        // assume: 11 columns, has heading in 1st line
+        int count = lines.size();
+        for (int i = 1; i < count; ++i) {
+            // split ,
+            String[] tokens = lines.get(i).split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+            System.out.println(i + ": " + lines.get(i));
+            // # of columns must be 11
+            if (tokens.length != 11)
+                continue;
+            
+            // trim "
+            for (int j = 0; j < tokens.length; ++j)
+                tokens[j] = tokens[j].replaceAll("^\"|\"$", "");
+            
+            // add to array
+            Person person = new Person();
+            
+            person.setFirstName(tokens[0]);
+            person.setLastName(tokens[1]);
+            person.setCompanyName(tokens[2]);
+            person.setAddress(tokens[3]);
+            person.setCity(tokens[4]);
+            person.setProvince(tokens[5]);
+            person.setPostal(tokens[6]);
+            person.setPhone1(tokens[7]);
+            person.setPhone2(tokens[8]);
+            person.setEmail(tokens[9]);
+            person.setWeb(tokens[10]);
+            
+            parsedPersons.add(person);
+            
         }
         System.out.println(parsedPersons.size());
         return parsedPersons;
@@ -67,6 +88,7 @@ public class Csv2Database {
     public ArrayList<Person> addPersons(ArrayList<Person> persons) {
         // reset
         addedPersons.clear();
+        Person person;
         
         // get all exsisting data from DB
         ArrayList<Person> exsistingPersons = getPersonsFromDatabase();
@@ -109,6 +131,7 @@ public class Csv2Database {
     private ArrayList<Person> getPersonsFromDatabase() {
         ArrayList<Person> persons = new ArrayList<>();
         
+        
         // connect to DB
         jdbc.connect(DB_URL, DB_USER, DB_PASS);
         
@@ -119,6 +142,7 @@ public class Csv2Database {
             ResultSet result = jdbc.query(sql);
             
             while (result.next()) {
+                Person person = new Person();
                 person.setFirstName(result.getString(2));
                 person.setLastName(result.getString(3));
                 person.setCompanyName(result.getString(4));
@@ -150,6 +174,4 @@ public class Csv2Database {
         
         return false;
     }
-    
-    
 }

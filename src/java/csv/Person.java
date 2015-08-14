@@ -1,5 +1,7 @@
 package csv;
 
+import java.util.Objects;
+
 public class Person {
     // 11 member vars
     private String firstName;
@@ -175,7 +177,7 @@ public class Person {
     
     @Override
     public boolean equals(Object o) {
-        Person p = null;
+        Person p = new Person();
         if (o instanceof Person) 
             p = (Person)o;
         else return false;
@@ -191,5 +193,22 @@ public class Person {
                 this.phone2.equals(p.getPhone2()) &&
                 this.email.equals(p.getEmail()) &&
                 this.web.equals(p.getWeb()));
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 61 * hash + Objects.hashCode(this.firstName);
+        hash = 61 * hash + Objects.hashCode(this.lastName);
+        hash = 61 * hash + Objects.hashCode(this.companyName);
+        hash = 61 * hash + Objects.hashCode(this.address);
+        hash = 61 * hash + Objects.hashCode(this.city);
+        hash = 61 * hash + Objects.hashCode(this.province);
+        hash = 61 * hash + Objects.hashCode(this.postal);
+        hash = 61 * hash + Objects.hashCode(this.phone1);
+        hash = 61 * hash + Objects.hashCode(this.phone2);
+        hash = 61 * hash + Objects.hashCode(this.email);
+        hash = 61 * hash + Objects.hashCode(this.web);
+        return hash;
     }
 }
