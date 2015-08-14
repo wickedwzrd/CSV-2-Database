@@ -13,15 +13,21 @@
 <title>Csv2Database Result</title>
 <style>
 body{
-    font-family:arial, helvetica, sans-serif;
+font-family:arial, helvetica, sans-serif;
+background-color: #1e1e1e;
+color: #00dc00;
+}
+h1 {
+color:#00daff;
 }
 table, th, td {
-    border-collapse:collapse;   
-    border:1px solid #aaa;
-    padding:0 5px;
+border-collapse:collapse;   
+border:1px solid #aaa;
+padding:0 10px;
+background-color: transparent;
 }
 tr:nth-child(odd) {
-    background-color: #eee; 
+color: #008cff; 
 }
 </style>
 </head>
@@ -30,12 +36,6 @@ tr:nth-child(odd) {
 <h1>CSV Upload Result</h1>
 <p>Parsed Records: ${parsedCount}</p>
 <p>Added Records: ${addedCount}</p>
-
-<%-- foreach loop to print added persons
-<c:forEach var="person" items="${addedPersons}" varStatus="status">
-    <p>${status.count} : ${person.firstName} ${person.lastName}</p>
-</c:forEach>
---%>
 
 <%-- print all records using EL --%>
 <table>
@@ -51,11 +51,11 @@ tr:nth-child(odd) {
     <td>${status.count}</td>
     <td>${person.firstName}</td>
     <td>${person.lastName}</td>
-    <td>${person.companyName}</td>
-    <td>${person.address}</td>
-    <td>${person.city}</td>
+    <td nowrap>${person.companyName}</td>
+    <td nowrap>${person.address}</td>
+    <td nowrap>${person.city}</td>
     <td>${person.province}</td>
-    <td>${person.postal}</td>
+    <td nowrap>${person.postal}</td>
     <td>${person.phone1}</td>
     <td>${person.phone2}</td>
     <td>${person.email}</td>

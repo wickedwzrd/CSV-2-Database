@@ -17,9 +17,7 @@ public class Person {
     private String web;
     
     // ctor
-    public Person() {
-    
-    }
+    public Person() {}
 
     /**
      * @return the firstName
@@ -193,22 +191,5 @@ public class Person {
                 this.phone2.equals(p.getPhone2()) &&
                 this.email.equals(p.getEmail()) &&
                 this.web.equals(p.getWeb()));
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 61 * hash + Objects.hashCode(this.firstName);
-        hash = 61 * hash + Objects.hashCode(this.lastName);
-        hash = 61 * hash + Objects.hashCode(this.companyName);
-        hash = 61 * hash + Objects.hashCode(this.address);
-        hash = 61 * hash + Objects.hashCode(this.city);
-        hash = 61 * hash + Objects.hashCode(this.province);
-        hash = 61 * hash + Objects.hashCode(this.postal);
-        hash = 61 * hash + Objects.hashCode(this.phone1);
-        hash = 61 * hash + Objects.hashCode(this.phone2);
-        hash = 61 * hash + Objects.hashCode(this.email);
-        hash = 61 * hash + Objects.hashCode(this.web);
-        return hash;
     }
 }
