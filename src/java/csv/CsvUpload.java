@@ -107,42 +107,4 @@ public class CsvUpload extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    /*
-    private void test(HttpServletResponse response, InputStream is) throws Exception {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        
-        // create file reader
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        
-        // read stream
-        String line;
-        int count = 1;
-        while ((line = reader.readLine()) != null) {
-            out.println("<p>" + count + ": " + line + "</p>\n");
-            ++count;
-        }
-        
-    }*/
-    
-    ///////////////////////////////////////////////////////////////////////////
-    // helper methods to print HTML content
-    ///////////////////////////////////////////////////////////////////////////
-    private void printHeader(PrintWriter out, String title, String css) {
-        String header = "<!DOCTYPE html>\n" +
-                        "<html lang=\"en\">\n" +
-                        "<head>\n" +
-                        "<meta charset=\"utf-8\">\n" +
-                        "<title>" +
-                        title +
-                        "</title>\n" +
-                        css +
-                        "</head>\n" +
-                        "<body>\n";
-        out.println(header);
-    }
-
-    private void printFooter(PrintWriter out) {
-        out.println("\n</body>\n</html>");
-    }
 }
